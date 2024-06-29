@@ -1,0 +1,53 @@
+//---------------- Some base styles
+
+.slider {
+	position: relative;
+	margin-bottom: 3rem;
+}
+
+.slider__list {
+	width: 100%;
+}
+
+.slider__item {
+	height: auto !important;
+	min-height: 20rem;
+
+	font-size: 2rem;
+
+	background: gold;
+}
+
+.slider__arrow {
+	position: absolute;
+	top: 50%;
+	z-index: 2;
+
+	width: 4rem;
+	height: 4rem;
+
+	padding: 0;
+
+	background: olive;
+	border: none;
+	cursor: pointer;
+	transform: translateY(-50%);
+
+	&.slider_arrow--prev {
+		left: 3rem;
+	}
+
+	&.slider_arrow--next {
+		right: 3rem;
+	}
+}
+
+.slider__dots {
+	& .swiper-pagination-bullet {
+		background: #a1b;
+	}
+
+	& .swiper-pagination-bullet-active {
+		background: #000;
+	}
+}

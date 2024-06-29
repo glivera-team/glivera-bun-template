@@ -1,0 +1,20 @@
+{
+	"extends": "@parcel/config-default",
+	"transformers": {
+		"webp:*.{jpg,jpeg,png,tiff,webp}": [
+			"@parcel/transformer-image"
+		],
+		"*.html": [
+			"parcel-transformer-html-datasrc",
+			"..."
+		]
+	},
+	"namers": [
+		"parcel-namer-sorter",
+		"..."
+	],
+	"resolvers": [
+		"parcel-resolver-exclude-assets",
+		"@parcel/resolver-default"
+	]
+}

@@ -1,0 +1,42 @@
+.slider_navigation {
+	@include flex_block(row, wrap, center, center, center);
+
+	position: absolute;
+	top: 50%;
+
+	width: 8rem;
+	height: 8rem;
+	margin-top: -4rem;
+	padding: 1rem;
+
+	background-color: $black;
+
+	transition: opacity 0.3 ease-in-out;
+	cursor: pointer;
+
+	&.swiper-button-disabled,
+	&.swiper-button-lock {
+		opacity: 0;
+		pointer-events: none;
+	}
+
+	&.slider_navigation--next_mod {
+		right: var(--gl-hr-indent);
+	}
+	&.slider_navigation--prev_mod {
+		left: var(--gl-hr-indent);
+	}
+
+	@media (hover: hover) {
+		&:hover,
+		&:focus {
+			text-decoration: none;
+			opacity: 0.8;
+		}
+	}
+
+	// --------------------------------------------- Mods
+	// .some_section & { ... }
+
+	// --------------------------------------------- Mods ###
+}

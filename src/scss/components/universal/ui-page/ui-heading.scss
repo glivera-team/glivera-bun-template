@@ -1,0 +1,29 @@
+.section_ui__title {
+	font-size: 7.2rem;
+	font-weight: 700;
+
+	&:not(:last-child) {
+		margin-bottom: 1.4rem;
+	}
+}
+
+.section_ui__text {
+	font-size: 1.8rem;
+
+	&:not(:last-child) {
+		margin-bottom: 2.6rem;
+	}
+
+	p:not(:last-child) {
+		margin-bottom: 0.6rem;
+	}
+}
+
+.section_ui__category {
+	font-size: 5.6rem;
+	font-weight: 700;
+
+	&:not(:last-child) {
+		margin-bottom: 1.4rem;
+	}
+}

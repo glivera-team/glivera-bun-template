@@ -1,0 +1,7 @@
+**/*.min.js
+**/*.min.css
+package-lock.json
+
+**/*.prettierignore
+helpers/*.*
+**/*.pug

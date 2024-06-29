@@ -1,0 +1,79 @@
+.form_quantity {
+	@include flex_block(row, wrap, flex-start, center, center);
+
+	width: 100%;
+	height: $input_height;
+	padding: 0 0.2rem;
+	font-size: $input_font_size;
+	font-family: $font_1;
+	color: $input_text_color;
+	box-shadow: inset 0 0 0 1px blue;
+	border: none;
+	background-clip: padding-box;
+	border-radius: 2.4rem;
+	will-change: box-shadow;
+	cursor: pointer;
+}
+
+.form_quantity__btn {
+	position: relative;
+	width: 5rem;
+	height: 5rem;
+	cursor: pointer;
+
+	&:first-child {
+		margin-right: 2.5rem;
+
+		&::before {
+			content: '';
+		}
+	}
+	&:last-child {
+		&::after,
+		&::before {
+			content: '';
+		}
+	}
+
+	&::after,
+	&::before {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+
+		width: 1.4rem;
+		height: 2px;
+		background-color: orange;
+
+		transition: background-color 0.3s ease-in-out;
+	}
+
+	&::after {
+		transform: translate(-50%, -50%) rotateZ(90deg);
+	}
+
+	@media (hover: hover) {
+		&:hover,
+		&:focus {
+			&::before,
+			&::after {
+				background-color: blue;
+			}
+		}
+	}
+}
+
+.form_quantity__value {
+	font-size: 2.2rem;
+	font-weight: 500;
+	margin-right: 2.5rem;
+}
+
+.form_quantity__input {
+	position: absolute;
+	pointer-events: none;
+	border: 0;
+	opacity: 0;
+	height: 0;
+}

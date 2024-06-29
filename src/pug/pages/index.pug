@@ -1,0 +1,9 @@
+extends ../layout/layout
+
+block vars
+	//- include ../templates/project-vars
+	- array = {body_class:'', layout_mod:'', sub_keywords:'', title_inner:'Index'}
+
+block content_block
+	section.section.index_section.demo_mod
+		h1.section_title Hola #[a.test(href='https://glivera-team.com/') Maketodor] :)

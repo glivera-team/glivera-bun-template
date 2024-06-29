@@ -1,0 +1,45 @@
+@mixin st_btn {
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+
+	text-align: center;
+	white-space: nowrap;
+	font-family: $font_1;
+
+	cursor: pointer;
+
+	&[type='submit'] {
+		@include appearance(none);
+	}
+
+	&:hover,
+	&:focus {
+		text-decoration: none;
+	}
+}
+
+//color mixins:
+@mixin btn_style_blue {
+	font-weight: 700;
+	color: $white;
+	background-color: $color_link_base;
+	transition: background-color 0.3s ease;
+
+	@include st_btn;
+
+	&:hover {
+		background-color: darken($color_link_base, 10%);
+	}
+}
+
+//size mixins:
+@mixin btn_size_normal {
+	height: 4rem;
+	padding: 0 1.2rem;
+
+	line-height: 4rem;
+	font-size: 1.6rem;
+
+	border-radius: $gl_radius;
+}

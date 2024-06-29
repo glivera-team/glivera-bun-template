@@ -1,0 +1,34 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# Mac OS X
+.DS_Store
+._.*
+._*
+
+# Ignore local editor
+.project
+.settings
+.idea
+.vscode
+*.swp
+tags
+nbproject/*
+.parcel-cache
+.cache
+sitemap.js
+
+# Windows
+Thumbs.db
+
+npm-debug.log
+
+/dist
+/dev-dist
+build/
+source/
+public/
+package-lock.json
+
+node_modules/
+test.mjs
+_html_entries/

@@ -1,0 +1,34 @@
+mixin accordion(data, mod, prefix)
+	- itemClass = prefix ||'accordion_';
+	- itemMod = mod || '';
+
+	ul(class= `${prefix || 'accordion'} ${itemMod} `)
+		each item in data
+			li(class= `${itemClass}_item ${item.trigger || ''}`)
+				div(class= `${itemClass}_item_head`)
+					div(class= `${itemClass}_item_title`)= item.title
+					if item.icon
+						div(class= `${itemClass}_item_icon_w`)
+							+icon( item.icon, 'size-mod')
+				div(class= `${itemClass}_item_body`)
+					if item.descr
+						div(class= `${itemClass}_item_body_in`)= item.descr
+					block
+
++accordion([
+		{
+			title: 'accordion item 1',
+			descr: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit dignissimos, aut magnam provident iste laborum at accusantium cupiditate fugiat. Consequatur deleniti maxime voluptas suscipit veritatis fuga sapiente porro temporibus architecto.',
+			icon: 'arrow_down'
+		},
+		{
+			title: 'accordion item 2',
+			descr: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit dignissimos, aut magnam provident iste laborum at accusantium cupiditate fugiat. Consequatur deleniti maxime voluptas suscipit veritatis fuga sapiente porro temporibus architecto.',
+			icon: 'arrow_down'
+		},
+		{
+			title: 'accordion item 3',
+			descr: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit dignissimos, aut magnam provident iste laborum at accusantium cupiditate fugiat. Consequatur deleniti maxime voluptas suscipit veritatis fuga sapiente porro temporibus architecto.',
+			icon: 'arrow_down'
+		},
+	])

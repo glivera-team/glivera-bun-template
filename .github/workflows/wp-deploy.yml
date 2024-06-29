@@ -1,0 +1,39 @@
+on:
+  workflow_dispatch:
+
+name: Handle Deploy WP-Build
+jobs:
+  web-deploy:
+    name: WP-Build Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get latest code
+        uses: actions/checkout@v2
+
+      - name: Use Node.js 16.19.0
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16.19.0'
+
+      - name: Installing packages
+        run: npm install
+
+      - name: Build Project
+        run: |
+          npm run build
+          npm run wp-build
+
+      - name: Deploying to the server
+        uses: SamKirkland/FTP-Deploy-Action@4.3.3
+        with:
+          server: ${{ secrets.HOST }}
+          username: ${{ secrets.WP_USER }}
+          password: ${{ secrets.WP_PASSWORD }}
+
+          local-dir: ./public/wp-content/themes/
+          server-dir: ./${{ secrets.WP_FOLDER || 'unnamed_project' }}/wp-content/themes/
+
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**

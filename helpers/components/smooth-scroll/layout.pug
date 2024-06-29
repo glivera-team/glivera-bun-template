@@ -1,0 +1,13 @@
+doctype
+html(lang="en")
+	head
+		+head(array)
+	body#body(class= array.body_class)
+		include ../blocks/preloader
+		+header
+		.scroll_wrapper.js-scroll-wrapper
+			.wrapper.js-scroll-inner
+				.base
+					block content_block
+				+footer
+		block local_popup

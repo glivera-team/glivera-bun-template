@@ -1,0 +1,63 @@
+// @import 'ScssHelpers/helpers-all.scss';
+
+.columns {
+	margin: 0 -4rem -4rem 0;
+
+	@include bp($point_2, min) {
+		@include flex_block(row, wrap, center, stretch, stretch);
+	}
+
+	&.columns--reverse_mod {
+		@include bp($point_2, min) {
+			flex-direction: row-reverse;
+		}
+	}
+}
+
+.columns__col {
+	padding: 0 4rem 4rem 0;
+
+	@include bp($point_2, min) {
+		width: 50%;
+	}
+	@include bp($point_3) {
+		width: 100%;
+	}
+
+	&.columns__col--info {
+	}
+
+	&.columns__col--img {
+	}
+}
+
+.columns__info {
+	width: 100%;
+}
+
+.columns__img_w {
+	position: relative;
+	display: block;
+
+	width: 100%;
+	padding-bottom: 75%;
+
+	overflow: hidden;
+}
+
+.columns__img {
+	@include cover_img;
+
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.columns__decor_img_w {
+	position: absolute;
+	pointer-events: none;
+}
+
+.columns__decor_img {
+	@include contain_img;
+}

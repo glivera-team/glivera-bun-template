@@ -1,0 +1,30 @@
+mixin image(data)
+	if !data.not_section
+		section.section.image(class=data.mod)
+			.section_in.image__in
+				+picture({
+					img: data.img,
+					class: 'image__img_w',
+					img_class: 'image__img',
+					alt: 'some image',
+					media: 768,
+					img_mob: data.img_mob,
+					lazy: true,
+				})
+				if data.video
+					.image__video_popup
+						.image__video.js-video(data-plyr-provider=data.video_provider src=data.video)
+					.image__play_btn_block
+						button.image__play_button(type="button", aria-label="Button to play the video")
+							+icon('play', 'icon--size_mod')
+	if data.not_section
+		.js-fade-item(class=data.mod)
+			+picture({
+				img: data.img,
+				class: 'image__img_w',
+				img_class: 'image__img',
+				alt: 'some image',
+				media: 768,
+				img_mob: data.img_mob,
+				lazy: true,
+			})

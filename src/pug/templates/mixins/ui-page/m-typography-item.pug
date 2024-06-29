@@ -1,0 +1,14 @@
+mixin typography_item(data)
+	if data.type == 'heading'
+		.ui_typography__line
+			each heading in data.content
+				.ui_typography__item!= heading
+	else
+		li.ui_typography__line
+			.ui_typography__item
+				if !data.type
+					#{data.tag}.ui_typography__title!= data.tag
+				else 
+					.ui_typography__text!= data.content
+			.ui_typography__item!= data.fz
+			.ui_typography__item!= data.fw

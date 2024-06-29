@@ -1,0 +1,19 @@
+//- for local HTML5 Video
+-	data1 = {playBtn: true, posterPath: 'poster.jpg', videoPath: 'images/video-example.mp4'}
+
+//- for videos from YouTube or Vimeo, you must specify data-plyr-provider and data-plyr-embed-id
+- data2 = {playBtn: false, posterPath: 'poster.jpg', videoProvider: 'youtube', videoId: 'bTqVqk7FSmY'}
+
+mixin dynamic_video(data)
+	.video.js-dynamic-video(data-poster=data.posterPath data-video-src=data.videoPath data-plyr-provider=data.videoProvider data-plyr-embed-id=data.videoId)
+		.video__poster_w.js-video-poster
+			if data.playBtn
+				button.video_btn(aria-label="play")
+					span.video__play_triangle
+			+picture({
+				class: 'video__poster',
+				img_class: 'video__poster_img',
+				img: data.posterPath,
+				alt: 'video poster',
+			})
+

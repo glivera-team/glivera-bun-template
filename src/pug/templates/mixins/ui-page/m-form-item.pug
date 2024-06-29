@@ -1,0 +1,5 @@
+mixin form_item(data)
+	li.ui_form__item(class=data.mod)
+		if data.title
+			.ui_form__title!= data.title
+		block

@@ -1,0 +1,7 @@
+// paste it in your base.scss
+
+body {
+	&.body--popup_open {
+		overflow: hidden;
+	}
+}

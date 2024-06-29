@@ -1,0 +1,10 @@
+.ui_components__item {
+	&:not(:last-child) {
+		margin-bottom: 2rem;
+	}
+}
+
+.ui_components__title {
+	font-size: 3.2rem;
+	font-weight: 700;
+}

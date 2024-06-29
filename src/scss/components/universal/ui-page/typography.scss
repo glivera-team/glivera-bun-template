@@ -1,0 +1,53 @@
+.ui_typography__line {
+	margin-right: -2rem;
+	padding: 1% 0;
+
+	border-bottom: 1px solid rgba($black, 0.6);
+
+	&:not(:last-child) {
+		margin-bottom: 1rem;
+	}
+
+	h1 {
+		@include h1;
+	}
+	h2 {
+		@include h2;
+	}
+	h3 {
+		@include h3;
+	}
+	h4 {
+		@include h4;
+	}
+	h5 {
+		@include h5;
+	}
+	h6 {
+		@include h6;
+	}
+
+	@include flex_block(row, nowrap, flex-start);
+}
+
+.ui_typography__title {
+	line-height: 1;
+	text-transform: uppercase;
+}
+
+.ui_typography__text {
+	@include text;
+}
+
+.ui_typography__item {
+	width: 33.333%;
+	padding-right: 2rem;
+	margin: auto 0;
+
+	font-size: 1.8rem;
+
+	&:nth-child(3n + 2),
+	&:nth-child(3n + 3) {
+		text-align: center;
+	}
+}

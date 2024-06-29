@@ -1,0 +1,84 @@
+@import 'ScssHelpers/helpers-all';
+
+// Add this file to path: src/scss/components/universal
+
+.popup {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: z-index(popup);
+
+	display: flex;
+	align-content: stretch;
+	width: 100%;
+	height: 100%;
+
+	overflow-x: hidden;
+	overflow-y: auto;
+
+	padding: 2rem var(--gl-indent);
+
+	background-color: rgba($black, .9);
+	transition: opacity .3s ease;
+	will-change: opacity;
+
+	&:not(.popup--open_state) {
+		opacity: 0;
+		pointer-events: none;
+	}
+
+	&.popup--open_state {
+		opacity: 1;
+		pointer-events: initial;
+	}
+}
+
+.popup_in {
+	position: relative;
+
+	width: $page_width;
+	max-width: 100%;
+	margin: auto;
+
+	background-color: $white;
+}
+
+.popup_close {
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+	z-index: 5;
+
+	width: 3.4rem;
+	height: 3.4rem;
+
+	transition: opacity .3s ease;
+	will-change: opacity;
+	cursor: pointer;
+
+	&:hover,
+	&:focus {
+		opacity: .8;
+	}
+
+	&::before,
+	&::after {
+		position: absolute;
+		top: 1.5rem;
+		left: 0;
+
+		height: 2px;
+		width: 3.4rem;
+
+		content: '';
+		background-color: $black;
+	}
+
+	&::before {
+		transform: rotate(45deg);
+	}
+
+	&::after {
+		transform: rotate(-45deg);
+	}
+}

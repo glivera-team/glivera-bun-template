@@ -1,0 +1,67 @@
+
+
+
+extends ../layout/layout
+
+include ../templates/mixins/ui-page/m-heading
+include ../templates/mixins/ui-page/m-component
+include ../templates/mixins/ui-page/m-typography-item
+include ../templates/mixins/ui-page/m-form-item
+
+block vars
+	- array = {body_class:'', layout_mod:'', sub_keywords:'', title_inner:'Ui'}
+
+block content_block
+	section.section.section_ui
+		if _sitemap && environment === 'development'
+			.section_ui__in.section_ui__in--size_mod
+				+heading({
+					title: 'Pages preview',
+					text: ' (используйте зум браузера, чтобы смотреть разрешения mobile/desktop)'
+				})
+				.section_ui__pages_list.js-dev-pages-list
+					each item in _sitemap
+						if item !== 'ui' && item !== 'article'
+							a.section_ui__page_item_wrap(href=`/${item}` data-page=item)
+								iframe.section_ui__page_item(src=`./${item}.pug`)
+
+		.section_in.section_ui__in
+			//- introducing
+			.section_ui__block
+				+heading({
+					title: 'Ui page',
+					text: 'This page is for showing project titles, buttons, forms, components.',
+				})
+
+			//- typography
+			.section_ui__block
+				+heading({
+					category: 'Typography',
+					text: 'This section contains all text elements: titles, texts.',
+				})
+
+			//- buttons
+			.section_ui__block
+				+heading({
+					category: 'Buttons',
+					text: 'This section contains all buttons.',
+				})
+				include ../blocks/universal/ui-page/buttons
+
+			//- forms
+			.section_ui__block
+				+heading({
+					category: 'Forms',
+					text: 'This section contains all form items: inputs, selects, textareas, checkboxes, radio buttons.',
+				})
+				include ../blocks/universal/ui-page/forms
+
+			//- components
+			.section_ui__block
+				+heading({
+					category: 'Components',
+					text: 'This section contains all components.',
+				})
+				include ../blocks/universal/ui-page/components
+
+

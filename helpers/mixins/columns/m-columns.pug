@@ -1,0 +1,41 @@
+//- +columns({
+//- 	class: 'features',
+//- 	mod: 'features--reverse_mod',
+//- 	img: 'feature-1.jpg',
+//- 	img_decor: 'some_decor.png'
+//- })
+//- 	in u ned put some in col text, write her
+
+mixin columns(data)
+	- elClass = data.class || 'columns';
+
+		div(class=`${elClass || ''} ${data.mod || ''}`)
+			if !data.remove_text_col
+				div(class=`${elClass}__col ${elClass}__col--info`)
+					div(class=`${elClass}__info`)
+						block
+
+			if data.img || data.decor
+				div(class=`${elClass}__col ${elClass}__col--img`)
+					if data.img
+						+picture({
+							media: 1024,
+							is2x: false,
+							img: data.img,
+							img_mob: data.img_mob || data.img,
+							class: `${elClass}__img_w`,
+							img_class: `${elClass}__img`,
+							alt: 'some image',
+						})
+
+					if data.decor
+						+picture({
+							media: 1024,
+							is2x: false,
+							img: data.decor,
+							img_mob: data.decor_mob || data.decor,
+							class: `${elClass}__decor_img_w`,
+							img_class: `${elClass}__decor_img`,
+							alt: 'some image',
+						})
+

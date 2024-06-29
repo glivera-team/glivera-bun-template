@@ -1,0 +1,99 @@
+form.ui_form
+	ul.ui_form__list
+		//- form component
+		+form_item({})
+			+form_input({
+				type: 'text',
+				label: 'Default input 1',
+				placeholder: 'Placeholder',
+				value: '',
+				id: 'input_1',
+			})
+		
+		//- form component
+		+form_item({})
+			+form_input({
+				type: 'text',
+				label: 'Default input 2',
+				placeholder: 'Placeholder',
+				value: '',
+				id: 'input_1',
+			})
+
+		//- form component
+		+form_item({
+			mod: 'ui_form__item--full_mod'
+		})
+			+form_textarea({
+				label: 'Default textarea',
+				placeholder: 'Placeholder',
+				id: 'textarea_1',
+			})
+
+		//- form component
+		+form_item({})
+			+form_select({
+				label: 'Default select 1',
+				options: [
+					{
+						title: 'item',
+					},
+					{
+						title: 'value',
+					},
+					{
+						title: 'hello',
+					},
+				],
+				id: 'select_1',
+			})
+
+		//- form component
+		+form_item({})
+			+form_select({
+				label: 'Default select 2',
+				options: [
+					{
+						title: 'item',
+					},
+					{
+						title: 'value',
+					},
+					{
+						title: 'hello',
+					},
+				],
+				id: 'select_1',
+			})
+
+		//- form component
+		+form_item({
+			title: 'Checkboxes'
+		})
+			.ui_form__subitem
+				+form_checkbox({
+					label: 'checkbox label 1',
+					checked: false,
+				})
+			.ui_form__subitem
+				+form_checkbox({
+					label: 'checkbox label 2',
+					checked: false,
+				})
+
+		//- form component
+		+form_item({
+			title: 'Radio buttons'
+		})
+			.ui_form__subitem
+				+form_radio({
+					label: 'radio label 1',
+					name: 'radio_1',
+					checked: false,
+				})
+			.ui_form__subitem
+				+form_radio({
+					label: 'radio label 2',
+					name: 'radio_1',
+					checked: false,
+				})

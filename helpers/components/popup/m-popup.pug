@@ -1,0 +1,5 @@
+mixin popup(name, popupId)
+	.popup(class=`js-popup-${name}` data-popup-id=popupId)
+		.popup_in
+			button.popup_close.js-popup-close(type="button" aria-label="Close Popup" tabindex="0")
+			block

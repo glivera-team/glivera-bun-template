@@ -1,0 +1,76 @@
+// Put in your base.scss
+
+:root {
+	::-webkit-scrollbar {
+		width: 4px;
+	}
+
+	::-webkit-scrollbar-track {
+		background: $gray_2;
+	}
+
+	::-webkit-scrollbar-thumb {
+		background-color: $dark_2;
+	}
+}
+
+@mixin disable_mobile_bars {
+	.scroll_smoother_state &,
+	&.scroll_smoother_state {
+		position: fixed !important;
+		left: 0;
+		top: 0;
+		height: var(--full-screen) !important;
+		width: 100%;
+		overflow: hidden !important;
+	}
+}
+
+html {
+	height: 100%;
+	min-height: var(--full-screen);
+	@include disable_mobile_bars;
+}
+
+body {
+	height: 100%;
+	overflow: hidden;
+	@include disable_mobile_bars;
+}
+
+.scroll_wrapper {
+	height: 100%;
+
+	.scroll_smoother_state & {
+		height: var(--full-screen);
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+
+		::-webkit-scrollbar {
+			width: 4px;
+		}
+
+		::-webkit-scrollbar-track {
+			background: $gray_2;
+		}
+
+		::-webkit-scrollbar-thumb {
+			background-color: $dark_2;
+		}
+	}
+}
+
+.wrapper {
+	position: relative;
+
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	min-height: 100%;
+	height: auto !important;
+	overflow-x: hidden;
+}
+
+//------------------------------------------------------------base styles###

@@ -1,0 +1,12 @@
+-
+	buttons = [
+		'Button 1',
+		'Button 2',
+		'Button 3',
+	];
+
+ul.ui_buttons
+	each button, index in buttons
+		li.ui_buttons__item
+			a.ui_buttons__btn(href="" class=`section_ui__btn--mod_${index+1}`)!=button
+

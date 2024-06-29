@@ -1,0 +1,62 @@
+{
+	"extends": ["airbnb", "prettier"],
+	"env": {
+		"node": true,
+		"jasmine": true,
+		"jquery": true,
+		"es2021": true
+	},
+
+	"ignorePatterns": ["srs/js/vendors/*.js", "srs/js/dev_vendors/*.js", "helpers/*.*"],
+	"plugins": ["prettier"],
+	"rules": {
+		"indent": [2, "tab"],
+		"no-tabs": 0,
+		"arrow-parens": "off",
+		"no-restricted-globals": "off",
+		"linebreak-style": 0,
+		"operator-linebreak": 0,
+		"react/prop-types": 0,
+		"no-alert": "off",
+		"prefer-const": "off",
+		"import/prefer-default-export": "off",
+		"arrow-body-style": "off",
+		"max-len": "off",
+		"no-unused-vars": "off",
+		"camelcase": "warn",
+		"import/no-extraneous-dependencies": "off",
+		"no-nested-ternary": "off",
+		"radix": "off",
+		"no-else-return": "off",
+		"no-lonely-if": "off",
+		"import/no-unresolved": "off",
+		"no-console": "off",
+		"class-methods-use-this": "off",
+		"no-shadow": "off",
+		"new-cap": 0,
+		"prefer-destructuring": "off",
+		"prettier/prettier": [
+			"error",
+			{
+				"endOfLine": "auto"
+			}
+		],
+		// "no-console": ["warn", { "allow": ["warn", "dir", "error"] }],
+		"quotes": [
+			2,
+			"single",
+			{
+				"avoidEscape": true
+			}
+		]
+	},
+	"globals": {
+		"browser": false,
+		"window": true,
+		"document": true
+	},
+	"parserOptions": {
+		"ecmaVersion": 12,
+		"sourceType": "module"
+	}
+}

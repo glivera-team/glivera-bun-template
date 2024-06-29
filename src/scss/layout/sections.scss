@@ -1,0 +1,27 @@
+//---------------------------------------------sections
+.section {
+	position: relative;
+
+	width: 100%;
+
+	font-size: 1rem;
+
+	//remove this demo style
+	&.demo_mod {
+		@include flex_block(row, nowrap, center, center, center);
+
+		height: calc(100vh - (var(--height-footer) + var(--height-header)));
+
+		font-size: 4rem;
+		color: $white;
+		text-align: center;
+
+		background-color: $black;
+	}
+}
+
+.section_in {
+	max-width: $page_width;
+	width: 100%;
+	margin: 0 auto;
+}

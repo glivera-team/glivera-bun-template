@@ -1,0 +1,34 @@
+.bread_crumbs {
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+.bread_crumbs__list {
+	display: flex;
+	align-items: center;
+
+	margin-right: -2rem;
+}
+
+.bread_crumbs__item {
+	padding-right: 2rem;
+
+	&:not(:first-child) {
+		&:before {
+			content: '>';
+			display: inline-block;
+			margin-right: 2rem;
+		}
+	}
+}
+
+.bread_crumbs__link {
+	&.bread_crumbs__link--current_mod {
+		pointer-events: none;
+	}
+
+	&:hover,
+	&:focus {
+		text-decoration: none;
+	}
+}

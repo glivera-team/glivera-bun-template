@@ -1,0 +1,62 @@
+@mixin form_el_checkbox {
+	position: relative;
+
+	padding-left: 3rem;
+
+	font-size: 1.6rem;
+	color: $black;
+	cursor: pointer;
+
+	&:before,
+	&:after {
+		position: absolute;
+		top: -1px;
+		left: 0;
+		width: 2rem;
+		height: 2rem;
+		cursor: pointer;
+		content: '';
+	}
+
+	&:before {
+		border-radius: 2px;
+		border: 1px solid $black;
+
+		transition: transform 0.2s, opacity 0.2s;
+		will-change: transform;
+
+		.form_checkbox__element:checked + & {
+			opacity: 0;
+			transform: rotateZ(40deg) scaleX(0.6) translateY(-3px);
+		}
+	}
+
+	&::after {
+		opacity: 0;
+
+		border-bottom: 2px solid $black;
+		border-right: 3px solid $black;
+
+		transition: transform 0.2s, opacity 0.2s;
+
+		.form_checkbox__element:checked + & {
+			transform: rotateZ(40deg) scaleX(0.6) translateY(-3px);
+			opacity: 1;
+		}
+	}
+
+	//--------------------------------------------- Font icon version
+	// &:after {
+	// 	@include icon-check;
+	// 	@include transition_opacity;
+
+	// 	text-align: center;
+	// 	line-height: 2rem;
+	// 	opacity: 0;
+	// 	color: $black;
+
+	// 	.form_checkbox__element:checked + & {
+	// 		opacity: 1;
+	// 	}
+	// }
+}

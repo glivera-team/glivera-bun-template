@@ -1,0 +1,103 @@
+extends ../layout/layout
+
+block vars
+	//- include ../templates/project-vars
+	- array = {body_class:'', layout_mod:'', sub_keywords:'', title_inner:'Article'}
+
+block content_block
+	//- inline style for demonstration page only
+	style.
+		.article_content {
+			font-size: 1.6rem;
+		}
+		h1 {
+			font-size: 2.8rem;
+			margin-bottom: 3rem;
+		}
+		h2 {
+			font-size: 2.4rem;
+			margin-bottom: 1.6rem;
+		}
+		h3 {
+			font-size: 2rem;
+			margin-bottom: 1rem;
+		}
+		p {
+			margin-bottom: 1rem;
+		}
+		ul,ol {
+			margin-bottom: 1.6rem;
+		}
+	section.section.article_content
+		.section_in
+			h1 Markup requirements and examples for WP article single page (blog single post, etc.)
+			h2 Example on WP site #[a(href="https://woo.glivera.com/test-page/") here]
+			h2 Section should be named .article_content #[br] All styles will be nested from parent selector,
+				|for ex. article_content p {some style}
+			h2
+			h2 Simple paragraph
+			p #[b Lorem ipsum] is simply dummy text of the #[i printing] and typesetting industry.
+				| Lorem Ipsum has been the industry's standard dummy text ever since the 1500s when an unknown printer took a galley
+				| of type and scrambled it to make a type specimen book. It has survived not only five centuries
+			p #[b Lorem ipsum] is simply dummy text of the #[i printing] and typesetting industry.
+				| Lorem Ipsum has been the industry's standard dummy text ever since the 1500s when an unknown printer took a galley
+				| of type and scrambled it to make a type specimen book. It has survived not only five centuries
+
+			h2 UL list
+			ul
+				li list item
+				li list item
+				li list item
+
+			h2 OL list
+			ol
+				li list item
+				li list item
+				li list item
+
+			h2 WP table
+			figure.wp-block-table
+				table
+					tbody
+						tr
+							td table cell
+							td table cell
+						tr
+							td
+							td
+						tr
+							td
+							td
+				figcaption table caption
+
+			h2 WP embeded video
+			figure.wp-block-embed.is-type-video.is-provider-youtube.wp-block-embed-youtube.wp-embed-aspect-16-9.wp-has-aspect-ratio
+				.wp-block-embed__wrapper
+					iframe(title='Rick Astley - Never Gonna Give You Up (Official Music Video)' width='525' height='295' src='https://www.youtube.com/embed/dQw4w9WgXcQ?feature=oembed' frameborder='0' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share' allowfullscreen='')
+				figcaption video caption
+
+			h2 WP simple blockquote
+			blockquote.wp-block-quote
+				p
+					| Quote description, can be
+					strong bold
+					em italic
+				cite
+					| Quote Author, can be
+					strong bold
+					em italic
+
+			h2 WP Single image
+			figure.wp-block-image
+				img.wp-image-77.loading(loading='lazy' width='801' height='801' src='http://woo.glivera.com/wp-content/uploads/2022/10/long-sleeve-tee-2.jpg' alt=''
+					srcset='https://woo.glivera.com/wp-content/uploads/2022/10/long-sleeve-tee-2.jpg 801w, https://woo.glivera.com/wp-content/uploads/2022/10/long-sleeve-tee-2-100x100.jpg 100w, https://woo.glivera.com/wp-content/uploads/2022/10/long-sleeve-tee-2-600x600.jpg 600w, https://woo.glivera.com/wp-content/uploads/2022/10/long-sleeve-tee-2-300x300.jpg 300w, https://woo.glivera.com/wp-content/uploads/2022/10/long-sleeve-tee-2-150x150.jpg 150w, https://woo.glivera.com/wp-content/uploads/2022/10/long-sleeve-tee-2-768x768.jpg 768w'
+					sizes='(max-width: 801px) 100vw, 801px')
+				figcaption image caption
+
+			h2 WP Media & text
+			.wp-block-media-text.alignwide.is-stacked-on-mobile.is-vertically-aligned-top(style='grid-template-columns:19% auto')
+				figure.wp-block-media-text__media
+					img.size-full.loading(loading='lazy' width='128' height='77' src='http://woo.glivera.com/wp-content/uploads/2022/12/logo_woo.png' alt='' data-was-processed='true')
+				.wp-block-media-text__content
+					p
+					| adipiscing at in tellus integer feugiat scelerisque varius morbi enim nunc faucibus a pellentesque sit amet porttitor eget dolor morbi non arcu risus quis varius quam quisque id diam vel quam elementum pulvinar etiam non quam lacus suspendisse faucibus interdum posuere lorem ipsum dolor sit amet consectetur adipiscing elit duis tristique sollicitudin nibh sit amet commodo nulla facilisi nullam vehicula ipsum a arcu cursus vitae congue mauris rhoncus aenean vel elit scelerisque mauris pellentesque pulvinar

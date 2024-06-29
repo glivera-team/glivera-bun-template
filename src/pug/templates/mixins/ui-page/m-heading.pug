@@ -1,0 +1,7 @@
+mixin heading(data)
+	if data.title
+		h1.section_ui__title!= data.title
+	if data.category
+		h3.section_ui__category!= data.category
+	if data.text
+		.section_ui__text!= data.text

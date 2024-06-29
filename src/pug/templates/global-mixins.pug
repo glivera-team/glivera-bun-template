@@ -1,0 +1,397 @@
+mixin head(array)
+	meta(charset='UTF-8')
+	title!= environment === 'development' ? `${environment} | ${array.title_inner}` : array.title_inner
+	meta(
+		name="description"
+		content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.")
+	meta(
+		name='viewport'
+		content='width=device-width, initial-scale=1, maximum-scale=5'
+	)
+	meta(
+		name='SKYPE_TOOLBAR',
+		content='SKYPE_TOOLBAR_PARSER_COMPATIBLE'
+	)
+	meta(
+		name='apple-mobile-web-app-capable',
+		content='yes'
+	)
+	meta(
+		name='format-detection',
+		content='telephone=no'
+	)
+	link(rel="stylesheet" href="./css/app.css")
+
+	if environment === 'production'
+		link(
+			rel='icon',
+			sizes='16x16 32x32 64x64',
+			href=`${assetsImage}favicon/favicon.ico`
+		)
+		link(
+			rel='icon',
+			type='image/png',
+			sizes='196x196',
+			href=`${assetsImage}favicon/favicon-192.png`
+		)
+		link(
+			rel='icon',
+			type='image/png',
+			sizes='160x160',
+			href=`${assetsImage}favicon/favicon-160.png`
+		)
+		link(
+			rel='icon',
+			type='image/png',
+			sizes='96x96',
+			href=`${assetsImage}favicon/favicon-96.png`
+		)
+		link(
+			rel='icon',
+			type='image/png',
+			sizes='64x64',
+			href=`${assetsImage}favicon/favicon-64.png`
+		)
+		link(
+			rel='icon',
+			type='image/png',
+			sizes='32x32',
+			href=`${assetsImage}favicon/favicon-32.png`
+		)
+		link(
+			rel='icon',
+			type='image/png',
+			sizes='16x16',
+			href=`${assetsImage}favicon/favicon-16.png`
+		)
+		link(
+			rel='apple-touch-icon',
+			href=`${assetsImage}favicon/favicon-57.png`
+		)
+		link(
+			rel='apple-touch-icon',
+			sizes='114x114',
+			href=`${assetsImage}favicon/favicon-114.png`
+		)
+		link(
+			rel='apple-touch-icon',
+			sizes='72x72',
+			href=`${assetsImage}favicon/favicon-72.png`
+		)
+		link(
+			rel='apple-touch-icon',
+			sizes='144x144',
+			href=`${assetsImage}favicon/favicon-144.png`
+		)
+		link(
+			rel='apple-touch-icon',
+			sizes='60x60',
+			href=`${assetsImage}favicon/favicon-60.png`
+		)
+		link(
+			rel='apple-touch-icon',
+			sizes='120x120',
+			href=`${assetsImage}favicon/favicon-120.png`
+		)
+		link(
+			rel='apple-touch-icon',
+			sizes='76x76',
+			href=`${assetsImage}favicon/favicon-76.png`
+		)
+		link(
+			rel='apple-touch-icon',
+			sizes='152x152',
+			href=`${assetsImage}favicon/favicon-152.png`
+		)
+		link(
+			rel='apple-touch-icon',
+			sizes='180x180',
+			href=`${assetsImage}favicon/favicon-180.png`
+		)
+		meta(
+			name='msapplication-TileColor',
+			content='#FFFFFF'
+		)
+		meta(
+			name='msapplication-TileImage',
+			content=`${assetsImage}favicon/favicon-144.png`
+		)
+		meta(
+			name='msapplication-config',
+			content=`${assetsImage}favicon/browserconfig.xml`
+		)
+
+//- form element v3
+
+mixin form_input(data)
+	- labelClass = data.label_class || 'form_input__label';
+	- elClass = data.class || 'form_input__element';
+	- blockClass = data.block_class || 'form_input';
+	- fieldClass = data.field_class || 'form_input__field';
+	div(class=blockClass)
+		if data.label
+			label(for=data.id, class=labelClass)= data.label
+		div(class=fieldClass)
+			input(
+				type=data.type,
+				class=elClass,
+				id=data.id,
+				placeholder=data.placeholder,
+				value=data.value,
+				name=data.name,
+				required=data.required,
+				title=data.title
+			)
+			block
+
+mixin form_textarea(data)
+	- labelClass = data.label_class || 'form_textarea__label';
+	- elClass = data.class || 'form_textarea__element';
+	.form_textarea(class=data.mod)
+		if data.label
+			label(for=data.id, class=labelClass)= data.label
+		.form_textarea__field
+			textarea(
+				class=elClass,
+				placeholder=data.placeholder,
+				name=data.name,
+				required=data.required,
+				title=data.title
+			)
+
+mixin form_select(data)
+	- labelClass = data.label_class || 'form_select__label';
+	- elClass = data.class || 'form_select__element';
+	.form_select(class=data.mod)
+		if data.label
+			label(for=data.id, class=labelClass)= data.label
+		.form_select__field
+			select(
+				class=`${elClass}`,
+				placeholder=data.placeholder,
+				name=data.name,
+				required=data.required
+			)&attributes(data.attrs)
+				each item in data.options
+					option(value=item)&attributes(item.attrs)= item.title
+
+mixin form_checkbox(data)
+	- labelClass = data.label_class || 'form_checkbox__label';
+	- elClass = data.class || 'form_checkbox__element';
+	.form_checkbox(class=data.mod)
+		label.form_checkbox__block
+			input(
+				class=elClass,
+				type='checkbox',
+				name=data.name,
+				checked=data.checked || false
+			)
+			span(class=labelClass)!= data.label
+
+mixin form_radio(data)
+	- labelClass = data.label_class || 'form_radio__label';
+	- elClass = data.class || 'form_radio__element';
+	.form_radio(class=data.mod)
+		label.form_radio__block
+			input(
+				class=elClass,
+				type='radio',
+				name=data.name,
+				checked=data.checked || false
+			)
+			span(class=labelClass)!= data.label
+
+
+mixin form_quantity(min, max)
+	.form_quantity.js-quantity
+		button.form_quantity__btn.js-quantity-decrease(type='button' aria-label='decrease quantity')
+		input.form_quantity__input.js-quantity-input(type='number' name='quantity' min=min max=max value=min)
+		.form_quantity__value.js-quantity-value= min
+		button.form_quantity__btn.js-quantity-increase(type='button' aria-label='increase quantity')
+
+//- form element v3###
+
+//- works
+mixin loop_while(counter)
+	- i = 0;
+	while i < counter
+		- i++;
+		block
+
+//- works
+mixin loop_while_sub(counter)
+	- j = 0;
+		while j < counter
+			- j++;
+			block
+
+//- works
+mixin breadcrumbs(data)
+	- mod = data.mod || '';
+	.breadcrumbs
+		ul.breadcrumbs__list(class=mod)
+			each crumb, index in data.list
+				li.breadcrumbs__item
+					if (index == array.length - 1)
+						a.breadcrumbs__link.breadcrumbs__link--current_mod= crumb.text
+					else
+						a.breadcrumbs__link(href=crumb.url)= crumb.text
+
+//- works
+mixin menu(menuArray)
+	- gl_mod = menuArray.gl_mod || '';
+	ul(class=`${menuArray.gl_class}__list `)
+		each item in menuArray.items
+			- url = item.url || '#';
+			li(
+				class=`${menuArray.gl_class}__item ${item.active ? `${menuArray.gl_class}__item--active_mod` : ''} ${gl_mod ? `${menuArray.gl_class}__item--${gl_mod}` : ''}`
+			)
+				a(
+					href=url,
+					class=`${menuArray.gl_class}__link ${gl_mod ? `${menuArray.gl_class}__link--${gl_mod}` : ''}`
+				)= item.title
+
+//- works
+mixin social(socialArray)
+	- mod_block = socialArray.mod_block || '';
+	ul.social_list(class=`${mod_block}`)
+		each item in socialArray.items
+			- mod_link = item.mod_link || '';
+			li.social_item
+				a.social_link(
+					href='#',
+					class=`${mod_link}`,
+					target='_blank'
+				)
+					+icon(item.name_icon, item.mod_icon)
+
+//- works
+mixin icon(name, mod)
+	- mod = mod || 'icon--size_mod';
+	span.icon(class=mod data-sprite-icon=name)
+		- const svgInline = readFileSync(`./src/images/icons/sprite-icons/${name}.svg`, "utf-8");
+		!= svgInline
+
+mixin slider_navigation(buttonMod = '')
+	button.slider_navigation.slider_navigation--prev_mod.js-slider-navigation-prev(class=buttonMod type="button" aria-label="Prev slide")
+		+icon('arrow_prev', 'icon--size_mod')
+	button.slider_navigation.slider_navigation--next_mod.js-slider-navigation-next(class=buttonMod type="button" aria-label="Next slide")
+		+icon('arrow_prev', 'icon--size_mod')
+
+mixin pagination(config)
+	- config.mod = config.mod || '';
+	- config.active = config.active || 1;
+	.pagination(class=config.mod)
+		ul.pagination__list
+			if config.arrows
+				li.pagination__item.pagination__item--prev_mod
+					a.pagination__link(href='#')
+			- i = 1;
+			while i <= config.pages
+				if i == config.pages - 1
+					li.pagination__item.pagination__item--dots_mod
+						a.pagination__link &hellip;
+					li.pagination__item
+						a.pagination__link(
+							href='#',
+							title=i
+						)= i
+				else if i == config.active
+					li.pagination__item.pagination__item--active_mod
+						a.pagination__link(title=i)= i
+				else
+					li.pagination__item
+						a.pagination__link(
+							href='#',
+							title=i
+						)= i
+				- i++;
+			if config.arrows
+				li.pagination__item.pagination__item--next_mod
+					a.pagination__link(href='#')
+
+//- picture
+mixin picture(data)
+	- imagesArray = data.img_mob ? [data.img, data.img_mob] : [data.img];
+	- dedicatedPaths = imagesArray.map((path) => path.split('.')); // array contains [path, type]
+	- typesArray = dedicatedPaths.map((path) => [path.pop()]); // get and remove type from path
+	- pathArray = dedicatedPaths.map((path) => assetsImage + path.join('.')); // full paths array
+
+	- is2x = data.is2x ? true : false;
+	- media = data.media;
+	- alt = data.alt || 'some image';
+	- loading = data.loading || data.lazy === undefined ? 'lazy' : data.lazy;
+
+	picture(class=data.class)
+		//- array of types, ex:[[jpg], [png]]
+		each type, i in typesArray
+			if (global.environment === 'production' || environment === 'production' || global.environment === 'preview' || environment === 'preview')
+				- type.unshift('webp');
+				- defaultTypeIndex = 1;
+			else
+				- defaultTypeIndex = 0;
+
+			//- sub array of types, ex:[[jpg], [webp]]
+			each subType, j in type
+				- mimeType = subType === 'jpg' ? 'jpeg' : subType;
+				- mediaAttr = undefined
+
+				if media
+					- mediaAttr = i === 0 ? `(min-width: ${media}px)` : `(max-width: ${media - 1}px)`;
+
+				if subType === 'webp'
+					- srcSet = `url:${pathArray[i]}.${type[defaultTypeIndex]}?as=webp${is2x ? `, url:${pathArray[i]}@2x.${type[defaultTypeIndex]}?as=webp 2x` : ''}`
+				else
+					- srcSet = `${pathArray[i]}.${type[defaultTypeIndex]}${is2x ? `, ${pathArray[i]}@2x.${type[defaultTypeIndex]} 2x` : ''}`
+
+				source(
+					media=mediaAttr,
+					srcset=srcSet,
+					type=`image/${mimeType}`
+				)
+		- source = `${pathArray[0]}.${typesArray[0][defaultTypeIndex]}`
+		img(
+			class=data.img_class,
+			src=source,
+			alt=alt,
+			loading=loading
+		)
+//- part for custom lazy load
+
+				source(
+					media=mediaAttr,
+					data-srcset=loading === 'lazy' ? srcSet : undefined
+					srcset=loading === 'lazy' ? undefined : srcSet,
+					type=`image/${mimeType}`
+				)
+		- source = `${pathArray[0]}.${typesArray[0][defaultTypeIndex]}`
+		img(
+			class=data.img_class,
+			src=loading === 'lazy' ? undefined : source,
+			data-src=loading === 'lazy' ? source : undefined
+			alt=alt,
+		)
+
+mixin dev_widget
+	if sitemap && (environment === 'development' || process.env.STAGING === 'true')
+		style.
+			body {position:relative}
+			.widget_wrap{position:absolute;top:100px;left:0;z-index:9999;padding:10px 20px;background:#222;-webkit-transition:all .3s ease;transition:all .3s ease;-webkit-transform:translate(-100%,0);-ms-transform:translate(-100%,0);transform:translate(-100%,0)}
+			.widget_wrap:after{content:"Navigation menu";color:white;position:absolute;top:0;left:100%;width:auto;height:auto;padding:10px;text-transform:uppercase;background:#222;cursor:pointer}
+			.widget_wrap:hover,
+			.widget_wrap:active,
+			.widget_wrap:focus {-webkit-transform:translate(0,0);-ms-transform:translate(0,0);transform:translate(0,0)}
+			.widget_item{padding:0 0 10px}
+			.widget_link{color:#fff;text-decoration:none;font-size:15px;}
+			.widget_link:hover{text-decoration:underline}
+
+		.widget_wrap
+			ul.widget_list
+				each item in sitemap
+					li.widget_item
+						a.widget_link(href=item)= item.replace(/\.html$/, '')
+
+mixin deploy_time
+	if process.env.STAGING === 'true'
+		- deployTime = new Date();
+		!= `<script type="text/javascript">console.log('Last version deployed at: ${deployTime}');</script>`

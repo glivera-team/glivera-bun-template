@@ -1,0 +1,23 @@
+.horizontal_wrap {
+	overflow: hidden;
+}
+
+.horizontal {
+	display: flex;
+	height: 100vh;
+}
+
+.horizontal_in {
+	display: flex;
+}
+
+.horizontal__block {
+	min-width: 40rem;
+	padding: 6rem 2rem;
+
+	background-color: lightcyan;
+
+	&:not(:last-child) {
+		margin-right: 10rem;
+	}
+}

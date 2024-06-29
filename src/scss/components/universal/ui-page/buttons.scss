@@ -1,0 +1,26 @@
+.ui_buttons {
+	margin: 0 -2rem -2rem 0;
+
+	@include flex_block(row, wrap, flex-start, center, center);
+}
+
+.ui_buttons__item {
+	padding: 0 2rem 2rem 0;
+}
+
+.ui_buttons__btn {
+	&.section_ui__btn--mod_1 {
+		@include btn_style_blue;
+		@include btn_size_normal;
+	}
+
+	&.section_ui__btn--mod_2 {
+		@include btn_style_blue;
+		@include btn_size_normal;
+	}
+
+	&.section_ui__btn--mod_3 {
+		@include btn_style_blue;
+		@include btn_size_normal;
+	}
+}

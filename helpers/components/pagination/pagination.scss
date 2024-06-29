@@ -1,0 +1,84 @@
+.pagination {
+	display: flex;
+	justify-content: center;
+}
+
+.pagination__list {
+	display: flex;
+	margin-right: -2rem;
+}
+
+.pagination__item {
+	padding-right: 2rem;
+}
+
+.pagination__link {
+	display: block;
+	height: 2.8rem;
+	line-height: 2.8rem;
+	padding: 0 1rem;
+	color: $black;
+	border: 1px solid black;
+	border-radius: 2px;
+
+	&:hover,
+	&:focus {
+		text-decoration: none;
+	}
+
+	.pagination__item--active_mod &,
+	&:hover {
+		color: $white;
+		background: gray;
+	}
+
+	.pagination__item--active_mod & {
+		pointer-events: none;
+	}
+
+	.pagination__item--dots_mod & {
+		border-color: transparent;
+
+		&:hover {
+			color: $black;
+			background: $white;
+		}
+	}
+
+	.pagination__item--prev_mod &,
+	.pagination__item--next_mod & {
+		position: relative;
+
+		&:before {
+			content: '';
+			position: absolute;
+			top: 50%;
+			margin: (-0.5rem) 0 0 0;
+			display: block;
+		}
+	}
+
+	.pagination__item--prev_mod & {
+		&:before {
+			left: 0.7rem;
+
+			@include arrow(left, $black, 1rem, 0.2rem);
+		}
+
+		&:hover:before {
+			@include arrow(left, $white, 1rem, 0.2rem);
+		}
+	}
+
+	.pagination__item--next_mod & {
+		&:before {
+			right: 0.7rem;
+
+			@include arrow(right, $black, 1rem, 0.2rem);
+		}
+
+		&:hover:before {
+			@include arrow(right, $white, 1rem, 0.2rem);
+		}
+	}
+}
