@@ -13,17 +13,17 @@ block vars
 
 block content_block
 	section.section.section_ui
-		if _sitemap && environment === 'development'
-			.section_ui__in.section_ui__in--size_mod
-				+heading({
-					title: 'Pages preview',
-					text: ' (используйте зум браузера, чтобы смотреть разрешения mobile/desktop)'
-				})
-				.section_ui__pages_list.js-dev-pages-list
-					each item in _sitemap
-						if item !== 'ui' && item !== 'article'
-							a.section_ui__page_item_wrap(href=`/${item}` data-page=item)
-								iframe.section_ui__page_item(src=`./${item}.pug`)
+		//- if _sitemap && environment === 'development'
+		//- 	.section_ui__in.section_ui__in--size_mod
+		//- 		+heading({
+		//- 			title: 'Pages preview',
+		//- 			text: ' (используйте зум браузера, чтобы смотреть разрешения mobile/desktop)'
+		//- 		})
+		//- 		.section_ui__pages_list.js-dev-pages-list
+		//- 			each item in _sitemap
+		//- 				if item !== 'ui' && item !== 'article'
+		//- 					a.section_ui__page_item_wrap(href=`/${item}` data-page=item)
+		//- 						iframe.section_ui__page_item(src=`./${item}.pug`)
 
 		.section_in.section_ui__in
 			//- introducing

@@ -320,7 +320,8 @@ mixin picture(data)
 	- is2x = data.is2x ? true : false;
 	- media = data.media;
 	- alt = data.alt || 'some image';
-	- loading = data.loading || data.lazy === undefined ? 'lazy' : data.lazy;
+	- loading = (data.lazy === false || data.jsLazy === true) ? 'eager' : 'lazy';
+	- jsLazy = data.jsLazy;
 
 	picture(class=data.class)
 		//- array of types, ex:[[jpg], [png]]
@@ -334,25 +335,24 @@ mixin picture(data)
 			//- sub array of types, ex:[[jpg], [webp]]
 			each subType, j in type
 				- mimeType = subType === 'jpg' ? 'jpeg' : subType;
-				- mediaAttr = undefined
+				- isWebp = subType === 'webp' ? '.webp' : '';
 
 				if media
 					- mediaAttr = i === 0 ? `(min-width: ${media}px)` : `(max-width: ${media - 1}px)`;
 
-				if subType === 'webp'
-					- srcSet = `url:${pathArray[i]}.${type[defaultTypeIndex]}?as=webp${is2x ? `, url:${pathArray[i]}@2x.${type[defaultTypeIndex]}?as=webp 2x` : ''}`
-				else
-					- srcSet = `${pathArray[i]}.${type[defaultTypeIndex]}${is2x ? `, ${pathArray[i]}@2x.${type[defaultTypeIndex]} 2x` : ''}`
+				- srcSet = `${pathArray[i]}.${type[defaultTypeIndex]}${isWebp}${is2x ? `, ${pathArray[i]}@2x.${type[defaultTypeIndex]}${isWebp} 2x` : ''}`
 
 				source(
 					media=mediaAttr,
-					srcset=srcSet,
+					srcset=jsLazy ? undefined : srcSet,
+					data-srcset=jsLazy ? srcSet : undefined
 					type=`image/${mimeType}`
 				)
 		- source = `${pathArray[0]}.${typesArray[0][defaultTypeIndex]}`
 		img(
 			class=data.img_class,
-			src=source,
+			src=jsLazy ? undefined : source,
+			data-src=jsLazy ? source : undefined
 			alt=alt,
 			loading=loading
 		)
