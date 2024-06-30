@@ -35,7 +35,7 @@ jobs:
           password: ${{ secrets.DEV_PASSWORD }}
 
           local-dir: ./build/
-          server-dir: ./2023/${{ secrets.DEV_FOLDER || 'unnamed_project' }}/
+          server-dir: ./2024/${{ secrets.DEV_FOLDER || 'unnamed_project' }}/
 
           exclude: |
             **/.git*
