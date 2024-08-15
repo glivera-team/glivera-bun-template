@@ -312,7 +312,7 @@ mixin pagination(config)
 
 //- picture
 mixin picture(data)
-	- imagesArray = data.img_mob ? [data.img, data.img_mob] : [data.img];
+	- imagesArray = data.imgMob ? [data.img, data.imgMob] : [data.img];
 	- dedicatedPaths = imagesArray.map((path) => path.split('.')); // array contains [path, type]
 	- typesArray = dedicatedPaths.map((path) => [path.pop()]); // get and remove type from path
 	- pathArray = dedicatedPaths.map((path) => assetsImage + path.join('.')); // full paths array
@@ -326,7 +326,7 @@ mixin picture(data)
 	picture(class=data.class)
 		//- array of types, ex:[[jpg], [png]]
 		each type, i in typesArray
-			if (global.environment === 'production' || environment === 'production' || global.environment === 'preview' || environment === 'preview')
+			if (!type.includes('svg') && (global.environment === 'production' || environment === 'production' || global.environment === 'preview' || environment === 'preview'))
 				- type.unshift('webp');
 				- defaultTypeIndex = 1;
 			else
@@ -334,7 +334,7 @@ mixin picture(data)
 
 			//- sub array of types, ex:[[jpg], [webp]]
 			each subType, j in type
-				- mimeType = subType === 'jpg' ? 'jpeg' : subType;
+				- mimeType = subType === 'jpg' && 'jpeg' || subType === 'svg' && 'image/svg+xml' || subType;
 				- isWebp = subType === 'webp' ? '.webp' : '';
 
 				if media
@@ -356,6 +356,7 @@ mixin picture(data)
 			alt=alt,
 			loading=loading
 		)
+
 //- part for custom lazy load
 
 				source(
