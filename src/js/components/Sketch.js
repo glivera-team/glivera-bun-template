@@ -164,7 +164,7 @@ export default class Sketch {
 			speed: 0.6,
 		};
 		this.gui.add(this.animationSettings, 'speed', 0.1, 1).onChange(() => {
-			this.timeline.timeScale(this.animationSettings.speed);
+			// this.timeline.timeScale(this.animationSettings.speed);
 		});
 	}
 }
