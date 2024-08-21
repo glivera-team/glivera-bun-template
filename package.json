@@ -19,8 +19,10 @@
   },
   "dependencies": {
     "cross-env": "^7.0.3",
+    "dat.gui": "^0.7.9",
     "gsap": "^3.10.4",
-    "ismobilejs": "^1.1.1"
+    "ismobilejs": "^1.1.1",
+    "three": "^0.167.1"
   },
   "devDependencies": {
     "bun-bundler": "^0.1.12",

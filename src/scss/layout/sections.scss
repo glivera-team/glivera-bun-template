@@ -1,27 +1,60 @@
-//---------------------------------------------sections
-.section {
-	position: relative;
+.title {
+	display: flex;
+	flex-direction: column;
+	z-index: 100;
+	position: fixed;
+	right: 0;
+	top: 10px;
+	width: auto;
+	font-size: 2rem;
+	background-color: #090b18;
+	color: white;
+	padding: 0.8rem 2rem 1.4rem 1.6rem;
+	font-family: 'Trebuchet MS';
+	font-weight: 400;
 
-	width: 100%;
-
-	font-size: 1rem;
-
-	//remove this demo style
-	&.demo_mod {
-		@include flex_block(row, nowrap, center, center, center);
-
-		height: calc(100vh - (var(--height-footer) + var(--height-header)));
-
-		font-size: 4rem;
-		color: $white;
-		text-align: center;
-
-		background-color: $black;
+	&::after {
+		position: absolute;
+		left: 4px;
+		top: 4px;
+		bottom: 4px;
+		right: 4px;
+		border: 1px solid #ffffff26;
+		border-right: 0;
+		content: '';
 	}
+
+	p {
+		padding-top: 0.4rem;
+		border-top: 1px solid #ffffff26;
+		align-self: flex-start;
+		padding-right: 2rem;
+		font-size: 1.4rem;
+		display: inline-flex;
+		color: rgba(255, 255, 255, 0.701);
+		font-family: 'RobotCondensed';
+		letter-spacing: 0.02em;
+	}
+
+	animation-name: anim;
+	animation-timing-function: ease-in-out;
+	animation-duration: 0.46s;
+	animation-fill-mode: forwards;
+	animation-iteration-count: 1;
+	animation-delay: 1s;
+	transform: translateX(100%);
 }
 
-.section_in {
-	max-width: $page_width;
+.section {
+	position: relative;
+	height: 100%;
 	width: 100%;
-	margin: 0 auto;
+}
+@keyframes anim {
+	0% {
+		transform: translateX(100%);
+	}
+	100% {
+		transform: translateX(0%);
+	}
 }

@@ -71,7 +71,7 @@ body {
 .base {
 	width: 100%;
 	position: relative;
-	padding: var(--height-header) 0 0;
+	// padding: var(--height-header) 0 0;
 
 	flex: 1 0 auto;
 }
@@ -97,6 +97,16 @@ html :where(.wp-block) {
 
 .editor-styles-wrapper {
 	overflow-x: hidden;
+}
+
+canvas {
+	display: block;
+}
+
+#container {
+	width: min(100vh, 100vw);
+	height: min(100vh, 100vw);
+	margin: 0 auto;
 }
 
 //------------------------------------------------------------base styles###

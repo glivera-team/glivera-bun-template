@@ -1,4 +1,6 @@
-# Welcome to glivera-bun-template
+# Welcome to glivera-bun-template/three.js
+
+This is a three.js template based on out bundle https://github.com/glivera-team/glivera-bun-template. And copy of "three-js-template" branch. You can check actual updates in this branch.
 
 ## Get started
 
