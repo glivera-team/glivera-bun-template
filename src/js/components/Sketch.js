@@ -5,6 +5,7 @@ import dat from 'dat.gui';
 // import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';s
 // import * as BufferGeometryUtils from 'three/addons/utils/BufferGeometryUtils.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { TransformControls } from 'three/examples/jsm/Addons.js';
 
 // for the glsl syntax highlighting
 const glsl = (strings, ...values) => {
@@ -64,7 +65,7 @@ export default class Sketch {
 	}
 
 	initControls() {
-		this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+		this.orbitControls = new OrbitControls(this.camera, this.renderer.domElement);
 	}
 
 	async loadResources(resources) {
@@ -165,6 +166,35 @@ export default class Sketch {
 		};
 		this.gui.add(this.animationSettings, 'speed', 0.1, 1).onChange(() => {
 			// this.timeline.timeScale(this.animationSettings.speed);
+		});
+	}
+
+	addTransformControls() {
+		this.transformControls = new TransformControls(this.camera, this.renderer.domElement);
+		this.scene.add(this.transformControls);
+
+		// example
+		const directionalLight = this.scene.getObjectByName('directionalLight');
+		if (directionalLight) {
+			this.transformControls.attach(directionalLight);
+		}
+
+		this.transformControls.addEventListener('dragging-changed', (event) => {
+			this.orbitControls.enabled = !event.value;
+		});
+
+		const inputTypes = {
+			r: 'rotate',
+			t: 'translate',
+			s: 'translate',
+		};
+
+		window.addEventListener('keydown', (event) => {
+			if (inputTypes[event.key]) this.transformControls.setMode(inputTypes[event.key]);
+		});
+
+		this.transformControls.addEventListener('change', () => {
+			this.renderer.render(this.scene, this.camera);
 		});
 	}
 }
