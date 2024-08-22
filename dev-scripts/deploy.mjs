@@ -53,7 +53,7 @@ const init = async () => {
 	if (!FTP_USER) return console.error('FTP_USER is not provided in FTP_ENV file.');
 	if (!FTP_HOST) return console.error('FTP_HOST is not provided in FTP_ENV file.');
 	if ((await getCurrentGitBranchName()) !== DEPLOY_BRANCH)
-		return console.error('You are not on the staging branch');
+		return console.error(`You are not on the "${DEPLOY_BRANCH}" branch.`);
 
 	return startDeploy({
 		server: FTP_HOST,
