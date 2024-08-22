@@ -28,7 +28,7 @@ jobs:
         run: bun run build
 
       - name: Deploying to the server
-        uses: SamKirkland/FTP-Deploy-Action@4.3.3
+        uses: SamKirkland/FTP-Deploy-Action@4.3.5
         with:
           server: ${{ secrets.HOST }}
           username: ${{ secrets.DEV_USER }}

@@ -1,64 +1,67 @@
 {
-  "author": "Glivera-team",
-  "name": "glivera-bun-template",
-  "version": "1.0.0",
-  "description": "Web Develpoment boilerplate - bun builder, base layout, snippets, and more.",
-  "directories": {
-    "src": "src"
-  },
-  "scripts": {
-    "start": "bun dev",
-    "dev": "cross-env NODE_ENV=development bun run dev-scripts/dev.mjs",
-    "build": "cross-env NODE_ENV=production bun run dev-scripts/build.mjs",
-    "staging": "cross-env NODE_ENV=production STAGING=true bun run dev-scripts/build.mjs",
-    "prepare": "npx husky install",
-    "js-lint": "eslint ./src --config",
-    "pretty": "npx prettier --check .",
-    "pretty:fix": "npx prettier --write .",
-    "lint": "npx lint-staged --quiet"
-  },
-  "dependencies": {
-    "cross-env": "^7.0.3",
-    "gsap": "^3.10.4",
-    "ismobilejs": "^1.1.1"
-  },
-  "devDependencies": {
-    "bun-bundler": "^0.1.12",
-    "eslint": "^8.4.1",
-    "eslint-config-airbnb": "^19.0.0",
-    "eslint-config-prettier": "^8.6.0",
-    "eslint-plugin-import": "^2.25.3",
-    "eslint-plugin-prettier": "^4.2.1",
-    "husky": "^8.0.0",
-    "lint-staged": "^13.1.0",
-    "prettier": "2.8.3"
-  },
-  "browserslist": [
-    "last 2 versions",
-    "> 5%"
-  ],
-  "keywords": [
-    "glivera",
-    "bun",
-    "bundle",
-    "boilerplate",
-    "template",
-    "scss",
-    "pug",
-    "javascript"
-  ],
-  "target": "web",
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "**/*.{js,jsx,tsx,ts,scss,css,json,html,pug}": [
-      "prettier --debug-check",
-      "prettier --write",
-      "prettier --check --config .prettierrc"
-    ],
-    "*.{js,jsx}": "eslint --quiet"
-  }
+	"author": "Glivera-team",
+	"name": "glivera-bun-template",
+	"version": "1.0.0",
+	"description": "Web Develpoment boilerplate - bun builder, base layout, snippets, and more.",
+	"directories": {
+		"src": "src"
+	},
+	"scripts": {
+		"start": "bun dev",
+		"dev": "cross-env NODE_ENV=development bun run dev-scripts/dev.mjs",
+		"build": "cross-env NODE_ENV=production bun run dev-scripts/build.mjs",
+		"staging": "cross-env NODE_ENV=production STAGING=true bun run dev-scripts/build.mjs",
+		"prepare": "npx husky install",
+		"js-lint": "eslint ./src --config",
+		"pretty": "npx prettier --check .",
+		"pretty:fix": "npx prettier --write .",
+		"lint": "npx lint-staged --quiet",
+		"deploy": "bun run staging && bun run dev-scripts/deploy.mjs"
+	},
+	"dependencies": {
+		"@samkirkland/ftp-deploy": "^1.2.4",
+		"cross-env": "^7.0.3",
+		"gsap": "^3.10.4",
+		"ismobilejs": "^1.1.1"
+	},
+	"devDependencies": {
+		"bun-bundler": "^0.1.12",
+		"dotenv": "^16.4.5",
+		"eslint": "^8.4.1",
+		"eslint-config-airbnb": "^19.0.0",
+		"eslint-config-prettier": "^8.6.0",
+		"eslint-plugin-import": "^2.25.3",
+		"eslint-plugin-prettier": "^4.2.1",
+		"husky": "^8.0.0",
+		"lint-staged": "^13.1.0",
+		"prettier": "2.8.3"
+	},
+	"browserslist": [
+		"last 2 versions",
+		"> 5%"
+	],
+	"keywords": [
+		"glivera",
+		"bun",
+		"bundle",
+		"boilerplate",
+		"template",
+		"scss",
+		"pug",
+		"javascript"
+	],
+	"target": "web",
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
+	},
+	"lint-staged": {
+		"**/*.{js,jsx,tsx,ts,scss,css,json,html,pug}": [
+			"prettier --debug-check",
+			"prettier --write",
+			"prettier --check --config .prettierrc"
+		],
+		"*.{js,jsx}": "eslint --quiet"
+	}
 }
