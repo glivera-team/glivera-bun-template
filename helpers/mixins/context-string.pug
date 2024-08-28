@@ -1,0 +1,44 @@
+//- 	* Generates a context string from the provided arguments.
+//- 	*
+//- 	* @param {...(string|Object)} args - The arguments to generate the context string from.
+//- 	*   - If a string is provided, it's included in the output as-is.
+//- 	*   - If an object is provided:
+//- 	*     - Keys with truthy values (except 'default' and 'radio') are included in the output.
+//- 	*     - If 'radio' is truthy and there are other valid keys, only the first valid key is included.
+//- 	*     - If there are no valid keys and 'default' is present, the 'default' value is used.
+//- 	*
+//- 	* @returns {string} The generated context string, with multiple items joined by spaces.
+//- 	*                   Returns an empty string if no valid arguments are provided.
+//- 	*/
+
+-
+	const ctx = (...args) => {
+		if (!args.length) return '';
+
+		return args
+			.flatMap((arg) => {
+				if (!arg) return [];
+
+				if (typeof arg === 'object') {
+					const classes = Object.entries(arg)
+						.filter(([key, value]) => value && key !== 'default' && key !== 'radio')
+						.map(([key]) => key);
+
+					if (arg.radio && classes.length) return [classes[0]];
+					if (!classes.length && arg.default) return [arg.default];
+					return classes;
+				}
+
+				return [arg];
+			})
+			.filter(Boolean)
+			.join(' ');
+	};
+
+
+
+
+
+
+
+
