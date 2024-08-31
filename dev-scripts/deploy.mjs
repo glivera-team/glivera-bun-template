@@ -1,17 +1,8 @@
 import { deploy } from '@samkirkland/ftp-deploy';
 import path from 'path';
-import { exec } from 'child_process';
-
 import dotenv from 'dotenv';
-
-const getCurrentGitBranchName = () => {
-	return new Promise((resolve, reject) => {
-		exec('git rev-parse --abbrev-ref HEAD', (err, stdout) => {
-			if (typeof stdout === 'string') return resolve(stdout.trim());
-			return reject(err);
-		});
-	});
-};
+import { getCurrentGitBranchName } from './utils';
+import { DEPLOY_BRANCH } from './constants';
 
 async function startDeploy({ server, username, password, folder }) {
 	console.log('[💹--- Deploy started ]');
@@ -45,7 +36,6 @@ const init = async () => {
 
 	dotenv.config();
 	dotenv.config({ path: path.resolve(process.cwd(), process.env.FTP_ENV) });
-	const DEPLOY_BRANCH = 'staging';
 
 	const { FTP_PASSWORD, FTP_USER, FTP_HOST, DEPLOY_FOLDER = path.basename(process.cwd()) } = process.env;
 

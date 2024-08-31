@@ -1,6 +1,8 @@
 import path from 'path';
 import { Bundler } from 'bun-bundler';
 import { SpriteBuilder, ImageProcessor } from 'bun-bundler/modules';
+import { getCurrentGitBranchName } from './utils';
+import { DEPLOY_BRANCH } from './constants';
 
 const bundler = new Bundler();
 const spriteBuilder = new SpriteBuilder();
@@ -9,6 +11,11 @@ const imgProcessor = new ImageProcessor();
 const dist = path.resolve('./build');
 const src = path.resolve('./src');
 const debugMode = false;
+
+const stagingBuild = process.env.STAGING === `true`;
+
+if (stagingBuild && (await getCurrentGitBranchName()) !== DEPLOY_BRANCH)
+	console.warn(`👀 Warning: You are not on the "${DEPLOY_BRANCH}" branch.`);
 
 bundler.build({
 	production: process.env.NODE_ENV === 'production',
