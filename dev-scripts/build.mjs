@@ -11,49 +11,41 @@ const imgProcessor = new ImageProcessor();
 const dist = path.resolve('./build');
 const src = path.resolve('./src');
 const debugMode = false;
-
 const stagingBuild = process.env.STAGING === `true`;
 
-if (stagingBuild && (await getCurrentGitBranchName()) !== DEPLOY_BRANCH)
-	console.warn(`👀 Warning: You are not on the "${DEPLOY_BRANCH}" branch.`);
+const build = async () => {
+	try {
+		if (stagingBuild && (await getCurrentGitBranchName()) !== DEPLOY_BRANCH)
+			console.warn(`👀 Warning: You are not on the "${DEPLOY_BRANCH}" branch.`);
 
-bundler.build({
-	production: process.env.NODE_ENV === 'production',
-	debug: debugMode,
-	html: () => Bundler.utils.getDirFiles(`${src}/pug/pages/`),
-	sass: [`${src}/scss/app.scss`],
-	js: [`${src}/js/app.js`],
-	staticFolders: [`${src}/images/`, `${src}/fonts/`, `${src}/static/`],
-	dist,
-	htmlDist: dist,
-	cssDist: `${dist}/css/`,
-	jsDist: `${dist}/js/`,
-	onBuildComplete: () => {
-		imgProcessor.process({
+		bundler.build({
+			production: process.env.NODE_ENV === 'production',
 			debug: debugMode,
-			root: `${dist}/images/`,
+			html: () => Bundler.utils.getDirFiles(`${src}/pug/pages/`),
+			sass: [`${src}/scss/app.scss`],
+			js: [`${src}/js/app.js`],
+			staticFolders: [`${src}/images/`, `${src}/fonts/`, `${src}/static/`],
+			dist,
+			htmlDist: dist,
+			cssDist: `${dist}/css/`,
+			jsDist: `${dist}/js/`,
+			onBuildComplete: () => {
+				imgProcessor.process({
+					debug: debugMode,
+					root: `${dist}/images/`,
+				});
+				spriteBuilder.build({
+					debug: debugMode,
+					htmlDir: dist,
+					dist: `${dist}/images/sprite/`,
+				});
+			},
+			// onCriticalError: () => {},
 		});
-		spriteBuilder.build({
-			debug: debugMode,
-			htmlDir: dist,
-			dist: `${dist}/images/sprite/`,
-		});
-	},
-	onCriticalError: () => {},
-});
+	} catch (error) {
+		console.error(error.message);
+		process.exit(1);
+	}
+};
 
-// setup
-// remove style include from js
-// js resolving paths
-// relative path to js in html
-
-// // export const ENV_STATUS = {
-// 	projectDevStatus: process.env.NODE_ENV === `development`,
-// 	projectStagingStatus: process.env.STAGING === `true`,
-// };
-
-/// ../../node_modules path
-// 		if environment === 'development'
-// - need for parcel rebuild in dev mode
-// object(data=`${assetsImage}icons/sprite-icons/${name}.svg` type="image/svg+xml" style="display: none")
-// - need for parcel rebuild in dev mode#
+build();
