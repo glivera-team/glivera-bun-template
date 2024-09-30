@@ -25,7 +25,7 @@
 		"ismobilejs": "^1.1.1"
 	},
 	"devDependencies": {
-		"bun-bundler": "^0.1.12",
+		"bun-bundler": "^0.1.15",
 		"dotenv": "^16.4.5",
 		"eslint": "^8.4.1",
 		"eslint-config-airbnb": "^19.0.0",
