@@ -28,10 +28,10 @@ jobs:
         run: bun add cross-env
 
       - name: Build Project
-        run: bun run deploy
+        run: bun run staging
 
       - name: Deploying to the server
-        uses: SamKirkland/FTP-Deploy-Action@4.3.5
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.HOST }}
           username: ${{ secrets.DEV_USER }}
