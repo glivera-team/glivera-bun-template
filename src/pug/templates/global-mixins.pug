@@ -322,11 +322,12 @@ mixin picture(data)
 	- alt = data.alt || 'some image';
 	- loading = (data.lazy === false || data.jsLazy === true) ? 'eager' : 'lazy';
 	- jsLazy = data.jsLazy;
+	- isProduction = (global.environment === 'production' || environment === 'production' || global.environment === 'preview' || environment === 'preview')
 
 	picture(class=data.class)
 		//- array of types, ex:[[jpg], [png]]
 		each type, i in typesArray
-			if (!type.includes('svg') && (global.environment === 'production' || environment === 'production' || global.environment === 'preview' || environment === 'preview'))
+			if (!type.includes('svg') && !type.includes('gif') && isProduction)
 				- type.unshift('webp');
 				- defaultTypeIndex = 1;
 			else
@@ -335,12 +336,12 @@ mixin picture(data)
 			//- sub array of types, ex:[[jpg], [webp]]
 			each subType, j in type
 				- mimeType = subType === 'jpg' && 'jpeg' || subType === 'svg' && 'image/svg+xml' || subType;
-				- isWebp = subType === 'webp' ? '.webp' : '';
+				- extName = subType === 'webp' ? '.webp' : `.${type[defaultTypeIndex]}`;
 
 				if media
 					- mediaAttr = i === 0 ? `(min-width: ${media}px)` : `(max-width: ${media - 1}px)`;
 
-				- srcSet = `${pathArray[i]}.${type[defaultTypeIndex]}${isWebp}${is2x ? `, ${pathArray[i]}@2x.${type[defaultTypeIndex]}${isWebp} 2x` : ''}`
+				- srcSet = `${pathArray[i]}${extName}${is2x ? `, ${pathArray[i]}@2x${extName} 2x` : ''}`
 
 				source(
 					media=mediaAttr,
