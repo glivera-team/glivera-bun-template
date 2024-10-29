@@ -22,7 +22,8 @@
 		"@samkirkland/ftp-deploy": "^1.2.4",
 		"cross-env": "^7.0.3",
 		"gsap": "^3.10.4",
-		"ismobilejs": "^1.1.1"
+		"ismobilejs": "^1.1.1",
+		"sharp": "^0.33.5"
 	},
 	"devDependencies": {
 		"bun-bundler": "^0.1.15",
