@@ -335,7 +335,7 @@ mixin picture(data)
 
 			//- sub array of types, ex:[[jpg], [webp]]
 			each subType, j in type
-				- mimeType = subType === 'jpg' && 'jpeg' || subType === 'svg' && 'image/svg+xml' || subType;
+				- mimeType = subType === 'jpg' && 'jpeg' || subType === 'svg' && 'svg+xml' || subType;
 				- extName = subType === 'webp' ? '.webp' : `.${type[defaultTypeIndex]}`;
 
 				if media
