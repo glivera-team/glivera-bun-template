@@ -26,6 +26,7 @@
 		"sharp": "^0.33.5"
 	},
 	"devDependencies": {
+		"sass": "1.77.6",
 		"bun-bundler": "^0.1.15",
 		"dotenv": "^16.4.5",
 		"eslint": "^8.4.1",
