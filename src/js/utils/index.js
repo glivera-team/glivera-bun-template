@@ -1,12 +1,22 @@
 import isMobile from 'ismobilejs';
 
-export const exist = (elementOrArray) => {
-	if (!elementOrArray && elementOrArray !== 0) return false;
-	if (elementOrArray.length === 0) {
-		return false;
+export function exist(propTarget) {
+	// deep boolean check for node/nodeList
+	// usage: $node.exist() or window.exist($node|$nodeList))
+
+	let target = this === window ? propTarget : this;
+
+	if (target instanceof window.NodeList) {
+		target = [...target];
 	}
-	return true;
-};
+
+	return Array.isArray(target)
+		? target?.length > 0 &&
+				target.every((item) => {
+					return item?.exist;
+				})
+		: !!target;
+}
 
 export function debounce(delay, fn) {
 	let timerId;
@@ -100,6 +110,25 @@ export const onWindowResize = (cb) => {
 	handleResize();
 };
 
+export const onWindowWidthResize = (cb) => {
+	let { windowWidth } = getWindowSize();
+	let debounce = null;
+
+	const handleResize = () => {
+		clearTimeout(debounce);
+		debounce = setTimeout(() => {
+			const { windowWidth: newWindowWidth } = getWindowSize();
+			if (windowWidth === newWindowWidth) return;
+			windowWidth = newWindowWidth;
+			cb();
+		}, 15);
+	};
+
+	window.addEventListener('resize', handleResize);
+
+	return () => window.removeEventListener('resize', handleResize);
+};
+
 export const detectUsersOS = () => {
 	if (window.navigator.userAgent.indexOf('Win') !== -1) return 'Windows OS';
 	if (window.navigator.userAgent.indexOf('Mac') !== -1) return 'Macintosh';
@@ -167,4 +196,17 @@ export const page = (cb) => {
 	// 	if (!window.onWindowLoadCallbacks) window.onWindowLoadCallbacks = [];
 	// 	window.onWindowLoadCallbacks.push(cb);
 	// }
+};
+
+export const setScrollBarWidth = () => {
+	const scrollDiv = document.createElement('div');
+	scrollDiv.style.width = '100px';
+	scrollDiv.style.height = '100px';
+	scrollDiv.style.overflow = 'scroll';
+	scrollDiv.style.visibility = 'hidden';
+
+	document.body.appendChild(scrollDiv);
+	const scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+	document.body.removeChild(scrollDiv);
+	document.documentElement.style.setProperty('--scrollbar-width', `${scrollbarWidth}px`);
 };
