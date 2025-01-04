@@ -20,13 +20,14 @@
 	},
 	"dependencies": {
 		"@samkirkland/ftp-deploy": "^1.2.4",
+		"bun": "^1.1.42",
 		"cross-env": "^7.0.3",
 		"gsap": "^3.10.4",
 		"ismobilejs": "^1.1.1",
 		"sharp": "^0.33.5"
 	},
 	"devDependencies": {
-		"sass": "1.77.6",
+		"bun": "1.1.34",
 		"bun-bundler": "^0.1.15",
 		"dotenv": "^16.4.5",
 		"eslint": "^8.4.1",
@@ -36,7 +37,8 @@
 		"eslint-plugin-prettier": "^4.2.1",
 		"husky": "^8.0.0",
 		"lint-staged": "^13.1.0",
-		"prettier": "2.8.3"
+		"prettier": "2.8.3",
+		"sass": "1.77.6"
 	},
 	"browserslist": [
 		"last 2 versions",
