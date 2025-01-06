@@ -1,10 +1,7 @@
 import isMobile from 'ismobilejs';
 
 export function exist(propTarget) {
-	// deep boolean check for node/nodeList
-	// usage: $node.exist() or window.exist($node|$nodeList))
-
-	let target = this === window ? propTarget : this;
+	let target = propTarget;
 
 	if (target instanceof window.NodeList) {
 		target = [...target];
@@ -13,7 +10,7 @@ export function exist(propTarget) {
 	return Array.isArray(target)
 		? target?.length > 0 &&
 				target.every((item) => {
-					return item?.exist;
+					return exist(item);
 				})
 		: !!target;
 }
