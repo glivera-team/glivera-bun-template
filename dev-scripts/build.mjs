@@ -20,7 +20,7 @@ const imgProcessor = new ImageProcessor();
 const dist = path.resolve('./build');
 const src = path.resolve('./src');
 const debugMode = false;
-const stagingBuild = process.env.STAGING === `true`;
+const stagingBuild = process.env.STAGING === 'true';
 
 const build = async () => {
 	try {
@@ -38,6 +38,7 @@ const build = async () => {
 			htmlDist: dist,
 			cssDist: `${dist}/css/`,
 			jsDist: `${dist}/js/`,
+			assembleStyles: `${dist}/css/app.css`,
 			onBuildComplete: () => {
 				imgProcessor.process({
 					debug: debugMode,

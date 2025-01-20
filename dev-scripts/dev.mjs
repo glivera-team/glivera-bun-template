@@ -29,6 +29,7 @@ const dev = () => {
 		dist,
 		htmlDist: dist,
 		cssDist: `${dist}/css/`,
+		assembleStyles: `${dist}/css/app.css`,
 		jsDist: `${dist}/js/`,
 		onStart: () => {
 			server.startServer({
