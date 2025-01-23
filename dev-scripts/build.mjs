@@ -47,7 +47,7 @@ const build = async () => {
 				spriteBuilder.build({
 					debug: debugMode,
 					htmlDir: dist,
-					dist: `${dist}/images/sprite/`,
+					dist: `${dist}/images/sprite/sprite.svg`,
 				});
 			},
 			// onCriticalError: () => {},
