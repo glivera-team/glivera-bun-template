@@ -16,7 +16,7 @@
 		"pretty": "npx prettier --check .",
 		"pretty:fix": "npx prettier --write .",
 		"lint": "npx lint-staged --quiet",
-		"deploy": "cross-env NODE_ENV=production bun run staging && bun run dev-scripts/deploy.mjs"
+		"deploy": "cross-env NODE_ENV=production npm run staging && bun run dev-scripts/deploy.mjs"
 	},
 	"dependencies": {
 		"@samkirkland/ftp-deploy": "^1.2.4",
