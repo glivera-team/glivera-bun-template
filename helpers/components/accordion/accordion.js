@@ -87,3 +87,14 @@ const Accordion = ({ triggers, activeStateName }) => {
 };
 
 export default Accordion;
+
+/* ------------ ** USAGE ** ------------ */
+
+/** Accordion init sample */
+
+import Accordion from './components/accordion';
+
+const accordion = Accordion({
+	triggers: document.querySelectorAll('.accordion__item_head'),
+	activeStateName: 'accordion__item--active-mod',
+});

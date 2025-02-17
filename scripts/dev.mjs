@@ -14,7 +14,7 @@ const spriteBuilder = new SpriteBuilder();
 const server = new Server();
 const imgProcessor = new ImageProcessor();
 
-const dist = path.resolve('./dev-dist');
+const dist = path.resolve('./dist');
 const src = path.resolve('./src');
 const debugMode = false;
 
