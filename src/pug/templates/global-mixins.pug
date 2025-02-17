@@ -312,48 +312,42 @@ mixin pagination(config)
 
 //- picture
 mixin picture(data)
+
+	-
+		const createPictureSources = ({ fileFormats, media, pathArray, isProduction }) => {
+			if (!fileFormats.length) return [];
+
+			const sourceNodes = fileFormats.map((format, i) => {
+				const mediaAttr = i === 0 ? `(min-width: ${media}px)` : `(max-width: ${media - 1}px)`;
+				const mimeType = format === 'jpg' && 'jpeg' || format === 'svg' && 'svg+xml' || format;
+				const distFormat = isProduction && format !== 'svg' && format !== 'gif' ?  'webp' : format;
+				const srcSet = `${pathArray[i]}.${distFormat}`;
+
+				return `<source media="${mediaAttr}" srcset="${srcSet}" type="image/${mimeType}">`;
+			});
+
+			return sourceNodes;
+		};
+
 	- imagesArray = data.imgMob ? [data.img, data.imgMob] : [data.img];
-	- dedicatedPaths = imagesArray.map((path) => path.split('.')); // array contains [path, type]
-	- typesArray = dedicatedPaths.map((path) => [path.pop()]); // get and remove type from path
-	- pathArray = dedicatedPaths.map((path) => assetsImage + path.join('.')); // full paths array
+	- dedicatedPaths = imagesArray.map((path) => path.split('.'));
+	- fileFormats = dedicatedPaths.map((path) => path.pop());
+	- pathArray = dedicatedPaths.map((path) => assetsImage + path.join('.'));
 
 	- is2x = data.is2x ? true : false;
-	- media = data.media;
-	- alt = data.alt || 'some image';
-	- loading = (data.lazy === false || data.jsLazy === true) ? 'eager' : 'lazy';
-	- jsLazy = data.jsLazy;
-	- isProduction = (global.environment === 'production' || environment === 'production' || global.environment === 'preview' || environment === 'preview')
+	- media = data.media || data.imgMob ? 768.5 : undefined;
+	- alt = data.alt || 'Content Picture';
+	- loading = data.loading || data.lazy === false ? 'eager' : 'lazy';
+	- isProduction = process.env.NODE_ENV === 'production'
 
 	picture(class=data.class)
-		//- array of types, ex:[[jpg], [png]]
-		each type, i in typesArray
-			if (!type.includes('svg') && !type.includes('gif') && isProduction)
-				- type.unshift('webp');
-				- defaultTypeIndex = 1;
-			else
-				- defaultTypeIndex = 0;
+		- mainFormat = isProduction && fileFormats[0] !== 'svg' && fileFormats[0] !== 'gif' ? 'webp' : fileFormats[0]
+		- sources = createPictureSources({ fileFormats, media, pathArray, isProduction });
+		!= sources.join('')
 
-			//- sub array of types, ex:[[jpg], [webp]]
-			each subType, j in type
-				- mimeType = subType === 'jpg' && 'jpeg' || subType === 'svg' && 'svg+xml' || subType;
-				- extName = subType === 'webp' ? '.webp' : `.${type[defaultTypeIndex]}`;
-
-				if media
-					- mediaAttr = i === 0 ? `(min-width: ${media}px)` : `(max-width: ${media - 1}px)`;
-
-				- srcSet = `${pathArray[i]}${extName}${is2x ? `, ${pathArray[i]}@2x${extName} 2x` : ''}`
-
-				source(
-					media=mediaAttr,
-					srcset=jsLazy ? undefined : srcSet,
-					data-srcset=jsLazy ? srcSet : undefined
-					type=`image/${mimeType}`
-				)
-		- source = `${pathArray[0]}.${typesArray[0][defaultTypeIndex]}`
 		img(
 			class=data.img_class,
-			src=jsLazy ? undefined : source,
-			data-src=jsLazy ? source : undefined
+			src=`${pathArray[0]}.${mainFormat}`,
 			alt=alt,
 			loading=loading
 		)
