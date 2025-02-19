@@ -47,6 +47,7 @@ const build = async () => {
 				spriteBuilder.build({
 					debug: debugMode,
 					htmlDir: dist,
+					spriteIconSelector: '[data-sprite-icon]',
 					dist: `${dist}/images/sprite/sprite.svg`,
 				});
 			},

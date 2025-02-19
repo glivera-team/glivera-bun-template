@@ -22,7 +22,7 @@ const dev = () => {
 	bundler.watch({
 		production: process.env.NODE_ENV === 'production',
 		debug: debugMode,
-		html: () => Bundler.utils.getDirFiles(`${src}/pug/pages/`),
+		html: `${src}/pug/pages/`,
 		sass: [`${src}/scss/app.scss`],
 		js: [`${src}/js/app.js`],
 		staticFolders: [`${src}/images/`, `${src}/fonts/`, `${src}/static/`],
@@ -47,6 +47,7 @@ const dev = () => {
 			spriteBuilder.build({
 				debug: debugMode,
 				htmlDir: dist,
+				spriteIconSelector: '[data-sprite-icon]',
 				dist: `${dist}/images/sprite/sprite.svg`,
 			});
 		},
