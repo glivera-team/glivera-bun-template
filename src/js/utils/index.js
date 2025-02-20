@@ -205,5 +205,8 @@ export const setScrollBarWidth = () => {
 	document.body.appendChild(scrollDiv);
 	const scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
 	document.body.removeChild(scrollDiv);
-	document.documentElement.style.setProperty('--scrollbar-width', `${scrollbarWidth}px`);
+	document.documentElement.style.setProperty(
+		'--scrollbar-width',
+		`${(scrollbarWidth / window.innerWidth).toFixed(4)}vw`,
+	);
 };
