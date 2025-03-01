@@ -264,12 +264,20 @@ mixin social(socialArray)
 					target='_blank'
 				)
 					+icon(item.name_icon, item.mod_icon)
+-
+	const getIcon = (iconName) => {
+		try {
+			readFileSync(`./src/images/icons/sprite-icons/${iconName}.svg`, "utf-8")
+		} catch(e) {
+			console.log('PUG: Error getting icon', name);
+		}
+	};
 
 //- works
 mixin icon(name, mod)
 	- mod = mod || 'icon--size_mod';
 	span.icon(class=mod data-sprite-icon=name)
-		- const svgInline = readFileSync(`./src/images/icons/sprite-icons/${name}.svg`, "utf-8");
+		- const svgInline = getIcon(name);
 		!= svgInline
 
 mixin slider_navigation(buttonMod = '')
