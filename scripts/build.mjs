@@ -26,6 +26,7 @@ const build = async () => {
 	try {
 		if (stagingBuild && (await getCurrentGitBranchName()) !== DEPLOY_BRANCH)
 			console.warn(`👀 Warning: You are not on the "${DEPLOY_BRANCH}" branch.`);
+		console.warn(`\n -> Building to the ./build directory...`);
 
 		bundler.build({
 			production: process.env.NODE_ENV === 'production',
