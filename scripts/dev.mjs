@@ -1,60 +1,58 @@
 /**
  * Development script for bundling and serving a web application.
- * This script sets up a development environment using bun-bundler,
- * watches for file changes, processes images, builds sprites,
- * and starts a local development server.
  */
 
-import path from 'path';
-import { Bundler } from 'bun-bundler';
-import { SpriteBuilder, Server, ImageProcessor } from 'bun-bundler/modules';
+import Bundler from 'bun-bundler';
+import { ImageProcessor, Server, SpriteBuilder } from 'bun-bundler/modules';
 
 const bundler = new Bundler();
-const spriteBuilder = new SpriteBuilder();
 const server = new Server();
+const spriteBuilder = new SpriteBuilder();
 const imgProcessor = new ImageProcessor();
 
-const dist = path.resolve('./dist');
-const src = path.resolve('./src');
-const debugMode = false;
+bundler.watch({
+	dist: './dist',
+	// sass/css bundling
+	sass: './src/scss/app.scss',
+	cssDist: './dist/css/',
+	// js bundling
+	js: './src/js/app.js',
+	jsDist: './dist/js/',
+	// html/pug bundling
+	html: './src/pug/pages',
+	htmlDist: './dist',
+	staticFolders: [
+		// static assets bundling
+		'./src/images/',
+		'./src/fonts/',
+		'./src/static/',
+	],
+	assembleStyles: './dist/css/app.css', // imported styles form JS goes here
+	production: process.env.NODE_ENV === 'production',
+	debug: false,
+	onStart: () => {
+		server.startServer({
+			root: './dist',
+			open: true,
+			debug: false,
+			port: 8080,
+			overrides: {},
+		});
+	},
+	onUpdate: ({ changes }) => {
+		if (changes.staticFolders) {
+			imgProcessor.start({
+				debug: false,
+				entry: './dist/images',
+			});
 
-const dev = () => {
-	bundler.watch({
-		production: process.env.NODE_ENV === 'production',
-		debug: debugMode,
-		html: `${src}/pug/pages/`,
-		sass: [`${src}/scss/app.scss`],
-		js: [`${src}/js/app.js`],
-		staticFolders: [`${src}/images/`, `${src}/fonts/`, `${src}/static/`],
-		dist,
-		htmlDist: dist,
-		cssDist: `${dist}/css/`,
-		assembleStyles: `${dist}/css/app.css`,
-		jsDist: `${dist}/js/`,
-		onStart: () => {
-			server.startServer({
-				open: true,
-				debug: debugMode,
-				port: 8080,
-				root: dist,
+			spriteBuilder.start({
+				debug: false,
+				dist: './dist/images/sprite/sprite.svg',
+				entry: './dist/',
+				spriteIconSelector: 'svg[data-sprite-icon]',
 			});
-		},
-		onBuildComplete: () => {
-			imgProcessor.process({
-				debug: debugMode,
-				root: `${dist}/images/`,
-			});
-			spriteBuilder.build({
-				debug: debugMode,
-				htmlDir: dist,
-				spriteIconSelector: '[data-sprite-icon]',
-				dist: `${dist}/images/sprite/sprite.svg`,
-			});
-		},
-		onCriticalError: () => {
-			server.stopServer();
-		},
-	});
-};
-
-dev();
+		}
+	},
+	onError: () => server.stopServer(),
+});
