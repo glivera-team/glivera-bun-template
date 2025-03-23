@@ -14,7 +14,7 @@ export default class SampleCanvas {
 
 	/** Initialization */
 	async init() {
-		if (this.container) return;
+		if (!this.container) return;
 
 		this.setupEvironment();
 		this.setupScene();
